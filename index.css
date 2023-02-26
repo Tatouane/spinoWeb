@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap');
 
 :root {
     --blue: #0BD1FF;
@@ -7,32 +8,181 @@
     --white: #FFFFFF;
 }
 
-a{
-    text-decoration: none;
-    color: var(--white);
+.bold {
+    font-weight: 900;
 }
 
-.nav {
+body{
+    background-color: var(--cyan);
+}
+
+/* Menu */
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    font-family: 'Inter', sans-serif;
+    width: 100vw;
+    height: 171px;
     margin-top: -0.86vh;
     margin-left: -0.48vw;
-    position: fixed;
-    width: 100vw;
-    height: 16.29vh;
+    top: 0;
+    color: var(--white);
     background: linear-gradient(180deg, #0BD1FF 0%, rgba(11, 209, 255, 0.5) 100%);
 }
-.nav ul{
-    list-style-type: none;
+
+nav .profile {
     display: flex;
-    z-index: 8.146vh;
-    flex-wrap: nowrap;
-    vertical-align: middle;
-    justify-content: space-between;
+    align-items: center;
 }
 
-#logo{
-    float: left;
-    vertical-align: middle;
-    border-radius: 200%;
-    height: 12.19vh;
-    width: 7.62vw;
+nav .profile img {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    margin-right: 29px;
+    margin-top: 21px;
+    margin-bottom: 22px;
 }
+
+nav .profile h1 {
+    font-size: 32px;
+    margin-right: 10px;
+    margin-top: 42px;
+    margin-bottom: 43px;
+}
+
+nav .logo {
+    display: flex;
+    align-items: center;
+}
+
+nav .logo img {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    margin-left: 26px;
+    margin-top: 21px;
+    margin-bottom: 22px;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+}
+
+nav ul li {
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 32px;
+    border-bottom: 1px solid #0bd2ff00;
+}
+
+nav ul li:hover {
+    border-bottom-color: var(--gray);
+    transition: all 500ms ease-in-out;
+}
+
+#profile {
+    border-radius: 200%;
+    margin: 21.5px;
+    /* height: 12.19vh;
+    width: 7.62vw; */
+    height: 128px;
+    width: 128px;
+}
+
+/* Fin Menu */
+
+/* Section stats */
+.page{
+    padding: 55px;
+}
+progress[value] {
+    width: 626px;
+    transition: width 5s ease;
+    height: 24px;
+    border-radius: 25px;
+}
+progress {
+    transition: width 5s ease;
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    border-radius: 25px;
+}
+::-webkit-progress-bar {
+    background-color: var(--gray);
+    transition: width 5s ease;
+    border-radius: 25px;
+}
+::-webkit-progress-value{
+    background-color: var(--blue);
+    transition: width 5s ease;
+    border-radius: 25px;
+}
+.progress{
+    width: 626px;
+    transition: width 5s ease;
+    height: 24px;
+}
+.progress-text {
+    z-index: 1;
+    position: absolute;
+    align-self: center;
+    align-items: center;
+    margin-top: 1.5px;
+    margin-left: 43.5px;
+    font-size: 0.8em;
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+}
+/* Div profil stats */
+#profil {
+    width: 722px;
+    height: 384px;
+    background-color: rgba(11, 210, 255, 0.4);
+    border-radius: 50px;
+    align-items: center;
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+}
+#profil h3{
+    margin-left: 37.5px;
+}
+.progress_stat{
+    margin-left: 37.5px;
+}
+.titre{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 37.5px;
+    margin-right: 31.5px;
+    margin-top: 15px;
+}
+.infos{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 41px;
+    align-self: center;
+    align-items: center;
+}
+/* Fin Div profil stats */
+/* Div profil vente stats */
+/* #profil_vendeur {
+    width: 722px;
+    height: 384px;
+    background-color: rgba(11, 210, 255, 0.4);
+    border-radius: 50px;
+    align-items: center;
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+} */
+/* Fin Div profil vente stats */
+/* Fin Section stats */

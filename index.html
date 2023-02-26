@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./pics/logo.png" type="image/png">
+    <link rel="stylesheet" href="index.css">
+    <script>
+	</script>
+    <title>Document</title>
+    <script>
+        function generateRandomString() {
+			let randomString = '';
+			const randomNumber = Math.floor(Math.random() * 10);
+
+			for (let i = 0; i < 20 + randomNumber; i++) {
+				randomString += String.fromCharCode(33 + Math.floor(Math.random() * 94));
+			}
+
+			return randomString;
+		}
+
+		window.onload = () => {
+			const fragment = new URLSearchParams(window.location.hash.slice(1));
+			const [accessToken, tokenType, state] = [fragment.get('access_token'), fragment.get('token_type'), fragment.get('state')];
+
+			if (!accessToken) {
+				const randomString = generateRandomString();
+				localStorage.setItem('oauth-state', randomString);
+
+				document.getElementsByClassName('login').href += `&state=${encodeURIComponent(btoa(randomString))}`;
+				return document.getElementById('login').style.display = 'block';
+			}
+
+			if (localStorage.getItem('oauth-state') !== atob(decodeURIComponent(state))) {
+				return console.log('You may have been click-jacked!');
+			}
+
+			fetch('https://discord.com/api/users/@me', {
+				headers: {
+					authorization: `${tokenType} ${accessToken}`,
+				},
+			})
+				.then(result => result.json())
+				.then(response => {
+					const { username, discriminator, avatar, id } = response;
+					document.getElementsByClassName('username').innerText += ` ${username}#${discriminator}`;
+                    document.getElementById('profile').innerHTML += `<span class="bold"><h1 class="username">Se connecter</h1></span><img id="profile_pic" src="./pics/profil.png" alt="Profile picture">`;
+                    document.getElementById('profile_pic').setAttribute('src', `https://cdn.discordapp.com/avatars/${id}/${avatar}.jpg`)
+				})
+				.catch(console.error);
+		}
+    </script>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <img src="./pics/logo.png" alt="Logo">
+        </div>
+        <ul>
+            <li><span class="bold">Accueil</span></li>
+            <li>Commander</li>
+            <li>A propos</li>
+            <li>Partenariats</li>
+        </ul> 
+        <div class="profile">
+            <a href="https://discord.com/api/oauth2/authorize?client_id=921432489552117792&redirect_uri=file%3A%2F%2F%2FM%3A%2Fcode%2FspinoWeb%2Findex.html&response_type=token&scope=identify"><span class="bold"><h1 class="username">Se connecter</h1></span></a>          
+            <a href="https://discord.com/api/oauth2/authorize?client_id=921432489552117792&redirect_uri=file%3A%2F%2F%2FM%3A%2Fcode%2FspinoWeb%2Findex.html&response_type=token&scope=identify"><img id="profile_pic" src="./pics/profil.png" alt="Profile picture"></a>
+        </div>
+    </nav>
+    <section class="page">
+        <div id="profil">
+            <div class="titre">
+                <h2>Profil</h2>
+                <h2 class="username">Tatouane#0830</h2>
+            </div>
+            <br>
+            <br>
+            <h3>XP</h3>
+            <div class="progress">
+                <div class="progress-text" id="XPtext">767/820</div><progress class="progress_stat" id="XP" max="820"
+                    value="12"></progress>
+            </div>
+            <br>
+            <h3>Commandes</h3>
+            <div class="progress">
+                <div class="progress-text">2/10</div>
+                <progress class="progress_stat" id="Commandes" max="10" value="2"></progress>
+            </div>
+        </div>
+        <div id="profil">
+            <div class="titre">
+                <h2 class="username">Profil vendeur</h2>
+                <h2>Tatouane#0830</h2>
+            </div>
+            <br>
+            <br>
+            <div class="infos">
+                <h3>Argent gagné:</h3>
+                <h3>160 000$</h3>
+            </div>
+            <div class="infos">
+                <h3>Commandes en cours:</h3>
+                <h3>2</h3>
+            </div>
+            <h3>Commandes prises</h3>
+            <div class="progress">
+                <div class="progress-text">7/10</div>
+                <progress class="progress_stat" id="Commandes" max="10" value="7"></progress>
+            </div>
+        </div>
+        <div id="commandes"></div>
+    </section>
+    <script>
+        var g = document.querySelector("XP");
+    
+        // Set the value of progress element
+        g.setAttribute("value", "799");
+    
+        // Set the maximum value of progress element
+        g.setAttribute("max", "820");
+    </script>
+</body>
+
+</html>
